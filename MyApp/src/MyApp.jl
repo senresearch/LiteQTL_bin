@@ -5,6 +5,7 @@ using LMGPU
 using DelimitedFiles
 
 function julia_main()
+
     try
         main()
     catch
@@ -14,27 +15,27 @@ function julia_main()
     return 0
 end
 
-
 function main()
 
     @info "getting args"
-    # println(ARGS)
-    # println(ARGS[1])
-    # println(args[2])
+
 
     # output_dir = "./data/SPLEEN_CLEAN_DATA/"
     # output_file ="julia_result.csv"
-    # rqtl_file = "./data/HC_M2_0606_R.zip"
+    # input_dir = "./data/UTHSC_SPL_RMA_1210/"
     # export_matrix = "false" == "true"
 
     output_dir = ARGS[1]
     output_file = ARGS[2]
-    rqtl_file = ARGS[3]
+    input_dir = ARGS[3]
     export_matrix = ARGS[4] == "true"
 
     @info "getting geno file and pheno file"
     geno_file = joinpath(output_dir,"geno_prob.csv")
     pheno_file = joinpath(output_dir, "pheno.csv")
+    gmap_file = get_gmap_file(input_dir, "gmap.csv")
+
+    
     output_file = joinpath(output_dir, output_file)
 
     LMGPU.set_blas_threads(16);
@@ -54,7 +55,7 @@ function main()
     # running analysis.
     lod = LMGPU.cpurun(Y, G,n,export_matrix);
     if !export_matrix
-        gmap = LMGPU.get_gmap_info(rqtl_file)
+        gmap = LMGPU.get_gmap_info(gmap_file)
         idx = trunc.(Int, lod[:,1])
         gmap_info = LMGPU.match_gmap(idx, gmap)
         lod = hcat(gmap_info, lod)
@@ -71,7 +72,7 @@ function main()
 end
 
 if abspath(PROGRAM_FILE) == @__FILE__
-    main()
+    julia_main()
 end
 
 end # module

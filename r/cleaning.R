@@ -63,6 +63,8 @@ clean_and_write<-function(url, output_dir, scan=FALSE,geno_output_file="geno_pro
   result_file <- file.path(output_dir, result_file)
   scan <- scan == "TRUE"
 
+  # file.rename(from=new_gmap_file,to=file.path(output_dir, "gmap.csv"))
+
   # innerjoin
   # pick out shared bxd ids in geno and pheno
   bxd_ids <- ind_ids_gnp(bxd)
