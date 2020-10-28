@@ -83,7 +83,7 @@ clean_and_write<-function(url, output_dir, scan=FALSE,geno_output_file="geno_pro
   cat("dimention of geno :", dim(prob1))
 
   write.csv(filled_bxd$pheno, file = pheno_output_file)
-  write.csv(prob1, file = geno_output_file)
+  write.csv(prob1, file = geno_output_file, row.names=FALSE)
   print("writing out pheno and geno done")
 
   if(scan){
