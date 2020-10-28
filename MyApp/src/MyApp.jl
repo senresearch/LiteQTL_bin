@@ -19,24 +19,17 @@ function main()
 
     @info "getting args"
 
-
-    # output_dir = "./data/SPLEEN_CLEAN_DATA/"
-    # output_file ="julia_result.csv"
-    # input_dir = "./data/UTHSC_SPL_RMA_1210/"
-    # export_matrix = "false" == "true"
-
-    output_dir = ARGS[1]
-    output_file = ARGS[2]
-    input_dir = ARGS[3]
+    geno_file = ARGS[1]
+    pheno_file = ARGS[2]
+    gmap_file = ARGS[3]
     export_matrix = ARGS[4] == "true"
+    output_file = ARGS[5]
 
     @info "getting geno file and pheno file"
-    geno_file = joinpath(output_dir,"geno_prob.csv")
-    pheno_file = joinpath(output_dir, "pheno.csv")
-    gmap_file = get_gmap_file(input_dir, "gmap.csv")
-
-    
-    output_file = joinpath(output_dir, output_file)
+    # geno_file = joinpath(output_dir,"geno_prob.csv")
+    # pheno_file = joinpath(output_dir, "pheno.csv")
+    # gmap_file = get_gmap_file(input_dir, "gmap.csv")
+    # output_file = joinpath(output_dir, output_file)
 
     LMGPU.set_blas_threads(16);
 
@@ -57,15 +50,18 @@ function main()
     if !export_matrix
         gmap = LMGPU.get_gmap_info(gmap_file)
         idx = trunc.(Int, lod[:,1])
-        gmap_info = LMGPU.match_gmap(idx, gmap)
+        # gmap[1] is data cells. 
+        gmap_info = LMGPU.match_gmap(idx, gmap[1])
+        gmap_with_header = vcat(gmap[2], gmap_info)
+        lod_with_header = vcat(reshape(["idx", "lod"], 1,:), lod)
         lod = hcat(gmap_info, lod)
-        header = reshape(["marker", "chr", "pos", "idx", "lod"], 1,:)
-        lod = vcat(header, lod)
+        # header = reshape(["marker", "chr", "pos", "idx", "lod"], 1,:)
+        # lod = vcat(header, lod)
     end
 
     # write output to file
     writedlm(output_file, lod, ',')
-    println("Lod exported to $output_file")
+    println("Lod exported to $(abspath(output_file))")
 
     return lod
 
