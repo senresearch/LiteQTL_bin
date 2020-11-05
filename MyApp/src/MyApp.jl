@@ -26,10 +26,6 @@ function main()
     output_file = ARGS[5]
 
     @info "getting geno file and pheno file"
-    # geno_file = joinpath(output_dir,"geno_prob.csv")
-    # pheno_file = joinpath(output_dir, "pheno.csv")
-    # gmap_file = get_gmap_file(input_dir, "gmap.csv")
-    # output_file = joinpath(output_dir, output_file)
 
     LMGPU.set_blas_threads(16);
 
@@ -68,7 +64,7 @@ function main()
 end
 
 if abspath(PROGRAM_FILE) == @__FILE__
-    julia_main()
+    main()
 end
 
 end # module
