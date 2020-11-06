@@ -1,4 +1,7 @@
 #!/bin/bash
+######################
+# This file will run with data using rqtl2 data format 
+######################
 
 # Assuming you are in LMGPU directory
 
