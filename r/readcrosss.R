@@ -1,5 +1,15 @@
 library(qtl)
 library(tidyverse)
+
+timefunc <- function(message, func, ...){
+  t = system.time({
+    val = func(...)
+  })
+  print("--------")
+  print(t)
+  print("--------")
+  return (val)
+}
 getmatchingBXD <- function(phenonames, genonames){
   # find all the matching columnnames in pheno and geno. 
   matched = phenonames[which(phenonames %in% genonames)]
