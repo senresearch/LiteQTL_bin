@@ -104,7 +104,7 @@ reorgdata<-function(genofile, phenofile, cleanphenofile, genoprobfile, gmapfile)
 
   bxd <- read.cross(file=rqtlfile,format="csvr",
                     crosstype="risib",genotypes=c("B","D"))
-  
+  ``
   if (file.exists(rqtlfile)) {
     #Delete file if it exists
     file.remove(rqtlfile)

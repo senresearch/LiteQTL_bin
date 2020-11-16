@@ -32,8 +32,10 @@ function main()
     #change to set computation with Float32 or Float64
     datatype = Float64 
     # Read in data.
-    G = LMGPU.get_geno_data(geno_file, datatype)
-    Y = LMGPU.get_pheno_data(pheno_file, datatype, transposed=false)
+    println("Getting genotype data:")
+    @time G = LMGPU.get_geno_data(geno_file, datatype)
+    println("Getting phenotype data:")
+    @time Y = LMGPU.get_pheno_data(pheno_file, datatype)
     # getting geno and pheno file size.
     n = size(Y,1)
     m = size(Y,2)
@@ -42,7 +44,8 @@ function main()
     # cpu_timing = benchmark(5, cpurun, Y, G,n,export_matrix);
 
     # running analysis.
-    lod = LMGPU.cpurun(Y, G,n,export_matrix);
+    println("Running genome scan takes: ")
+    @time lod = LMGPU.cpurun(Y, G,n,export_matrix);
     if !export_matrix
         gmap = LMGPU.get_gmap_info(gmap_file)
         idx = trunc.(Int, lod[:,1])
@@ -56,7 +59,9 @@ function main()
     end
 
     # write output to file
-    writedlm(output_file, lod, ',')
+    println("Export whole LOD matrix? $export_matrix")
+    println("Writing out lod file.")
+    @time writedlm(output_file, lod, ',')
     println("Lod exported to $(abspath(output_file))")
 
     return lod
