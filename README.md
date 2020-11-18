@@ -1,5 +1,16 @@
 LMGPU.jl is a package that simplifies genome scan process for eQTL scans, to gain significant speed up. This repository contains code to showcase how to use LMGPU to run genome scan, and also how to compile LMGPU to binary to remove the JIT compilation cost of Julia. 
 
+To run the scripts in this repository. You will need wget, R and Julia installed. 
+You will also need the following R packages: `parallel`, `qtl`, `qtl2`, `stringr`
+
+TL,DR:
+Run this in terminal:
+`$ ./sh/testrun.sh`
+`$ julia install_packages.jl` 
+`$ julia build_bin.jl`
+`$ ./sh/run_genome_scan.sh`
+
+
 ## 1. Process of running eQTL genome scan. 
 There are two steps: 1. We use R to clean genotype and phenotype and calculate genotype probability with R/qtl. (see `./r/clean_raw_data.R`) 2. Then we use Julia to run genome scan (see `./MyApp/src/MyApp.jl`). The purpose of having two step is to seperate data cleaning from genome scan process, since data cleaning is a one time cost, the result can be cached to be reused by the genome scan in step 2. 
 

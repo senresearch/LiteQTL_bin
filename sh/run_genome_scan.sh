@@ -31,21 +31,21 @@ gmapfile="./data/BXD_gmap.csv"
 
 time Rscript --vanilla ./r/clean_raw_data.R $genofile $phenofile $cleanphenofile $genoprobfile $gmapfile
 
-# If export_matrix set to true, then the entire LOD score matrix will be exported. If false, only maximum lod and related gmpa info will be exported.
 
 # SPLEEN DATA 
-
+# If export_matrix set to true, then the entire LOD score matrix will be exported. If false, only maximum lod and related gmpa info will be exported.
 export_matrix="false"
 # genome scan results.
 output_file="./data/spleen_julia_result.csv"
 
 # # HIPPO DATA 
-
 # export_matrix="false"
 # # genome scan results.
 # output_file="./data/hippo_julia_result.csv"
 
-# # to run with compiled version of genome scan
-# time JULIA_NUM_THREADS=16 ./Compiled/bin/scan $genoprobfile $cleanphenofile $gmapfile $export_matrix $output_file
+
 # # to run with julia script. (not compiled)
 # time JULIA_NUM_THREADS=16 julia ./MyApp/src/MyApp.jl $genoprobfile $cleanphenofile $gmapfile $export_matrix $output_file
+
+# # to run with compiled version of genome scan
+time JULIA_NUM_THREADS=16 ./Compiled/bin/scan $genoprobfile $cleanphenofile $gmapfile $export_matrix $output_file

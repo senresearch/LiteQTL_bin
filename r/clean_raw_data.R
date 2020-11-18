@@ -1,5 +1,7 @@
 library(qtl)
 library(stringr)
+library(parallel)
+library(qtl2)
 
 timefunc <- function(message, func, ...){
   t = system.time({
@@ -61,8 +63,6 @@ reorgdata<-function(genofile, phenofile, cleanphenofile, genoprobfile, gmapfile)
   if (file.exists(rqtlgenofile)) {file.remove(rqtlgenofile)}
   # if (file.exists(rqtlphenofile)) {file.remove(rqtlphenofile)}
 
-  library(parallel)
-  library(qtl2)
   cvt1<-convert2cross2(bxd)
   print(paste("Number of chromosomes is", n_chr(cvt1)))
   map <- insert_pseudomarkers(cvt1$gmap, step=0)
