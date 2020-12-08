@@ -22,7 +22,7 @@ Test your build:
 ### 1. Process of running eQTL genome scan. 
 There are two steps:  
 1. We use R to clean genotypes and phenotypes and calculate genotype probabilities with R/qtl. (see `./r/clean_raw_data.R`) 
-2. Then we use Julia to run genome scan (see `./MyApp/src/MyApp.jl`). The purpose of having two steps is to seperate data cleaning from the genome scans.  The, data cleaning needs to be done once, and the result can be cached to be reused by the genome scan in step 2. 
+2. Then we use Julia to run genome scan (see `./MyApp/src/MyApp.jl`). The purpose of having two steps is to seperate data cleaning from the genome scans.  The data cleaning needs to be done once, and the result can be cached to be reused by the genome scan in step 2. 
 
 To see an example of running a genome scan with both steps, please see `./sh/run_genome_scan.sh`. 
 
