@@ -2,14 +2,26 @@
 
 DATADIR=data
 RAWDATADIR=$DATADIR/raw
-mkdir $DATADIR
-mkdir $RAWDATADIR
+FILE=./testrun
+if [ ! -d "$DATADIR" ]; then 
+    mkdir $DATADIR
+fi 
 
-# get the data from API 
-# get genotype 
-wget -O $RAWDATADIR/bxd.geno http://genenetwork.org/api/v_pre1/genotypes/BXD.geno
-wget -O $RAWDATADIR/bxdspleen.txt http://datafiles.genenetwork.org/download/GN283/GN283_MeanDataAnnotated_rev081815.txt
-wget -O $RAWDATADIR/bxdhippo.txt http://datafiles.genenetwork.org/download/GN206/GN206_MeanDataAnnotated_rev081815.txt
+if [ ! -d "$RAWDATADIR" ]; then 
+    mkdir $RAWDATADIR
+fi 
+
+
+GENOFILE=$RAWDATADIR/bxd.geno
+if [ ! -f "$GENOFILE" ]; then 
+    # get the data from API 
+    # get genotype 
+    wget -O $RAWDATADIR/bxd.geno http://genenetwork.org/api/v_pre1/genotypes/BXD.geno
+    wget -O $RAWDATADIR/bxdspleen.txt http://datafiles.genenetwork.org/download/GN283/GN283_MeanDataAnnotated_rev081815.txt
+    wget -O $RAWDATADIR/bxdhippo.txt http://datafiles.genenetwork.org/download/GN206/GN206_MeanDataAnnotated_rev081815.txt
+else 
+    echo "Test data already downloaded."
+fi
 
 # SPLEEN DATA
 
