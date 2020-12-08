@@ -1,4 +1,4 @@
-[LMGPU.jl](https://github.com/senresearch/LMGPU.jl) is a package that speeds up eQTL scans. This repository contains code to create a command line interface to LMGPU.jl; you can create a binary to remove the JIT compilation cost of Julia. The repository also contains examples for testing your build.
+[LMGPU.jl](https://github.com/senresearch/LMGPU.jl) is a package that speeds up eQTL scans. This repository contains code to create a command line interface to LMGPU.jl; you can create a binary to remove the JIT compilation cost of Julia. The repository also contains examples for testing your build. Currently, this script builds a binary for the CPU version of LMGPU.jl. 
 
 ## Dependencies and build instructions
 
@@ -52,7 +52,7 @@ Command line input required are (in the order specified below):
 - `export_matrix` option (input); if `true`, a matrix of LOD scores will be returned; if `false` just the maximum LOD for each phenotype is returned (the latter is faster) 
 - LOD score file (output)
 
-If `export_matrix` is set to `false`, the file will contain the marker information (chromosome, marker name, marker cM and bp position), and the the value of the maximum LOD.
+If `export_matrix` is set to `false`, the file will contain the marker information (index, locus, chromosome, marker cM and Mb), and the the value of the maximum LOD.
 
 ### 2. How to build the binary 
 
