@@ -52,16 +52,21 @@ Command line input required are (in the order specified below):
 - `export_matrix` option (input); if `true`, a matrix of LOD scores will be returned; if `false` just the maximum LOD for each phenotype is returned (the latter is faster) 
 - LOD score file (output)
 
-If `export_matrix` is set to `false`, the file will contain two columns, the index of where the maximum LOD is found, and the the value of the maximum LOD.
+If `export_matrix` is set to `false`, the file will contain the marker information (chromosome, marker name, marker cM and bp position), and the the value of the maximum LOD.
 
-## 2. How to build binary 
-We used PackageCompiler.jl to build the binary. The binary building process follows the rules and standards of Julia's package system. 
-Please run step 1 (R data cleaning) to generate necessary data file, required by the precompilation. Make sure the input and output file names are correct in `./MyApp/precompile_app.jl` 
-### To build the binary, run the following in terminal:
-- `julia install_packages.jl` 
-- `julia build_bin.jl`
+### 2. How to build the binary 
 
-Building the binary will generate a folder called `Compiled`, the subfolders are `artifacts`, `bin`, `lib`. All three folders are required if you want to relocate the binary to elsewhere. Binary is located in `bin`. 
+We use `PackageCompiler.jl` to build the binary. The build process follows the rules and standards of Julia's package system. 
+Please run step 1 (R data cleaning) to generate necessary data files required by the precompilation. You can verify that the interpreted JIT compiled toolchain is working correctly by running `./sh/testrun.sh`.
+
+To build the binary, run the following in terminal:
+
+    julia build_bin.jl
+
+Building the binary will generate a folder called `Compiled`, the subfolders are `artifacts`, `bin`, `lib`. All three folders are required if you want to relocate the binary elsewhere. The binary is `./Compiled/bin/scan`. 
 
 ## 3. How to use the binary 
+
 See the last line in `./sh/run_genome_scan.sh`. 
+
+The arguments are the same and in the same order as in section 1.2.
