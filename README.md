@@ -65,8 +65,12 @@ To build the binary, run the following in terminal:
 
 Building the binary will generate a folder called `Compiled`, the subfolders are `artifacts`, `bin`, `lib`. All three folders are required if you want to relocate the binary elsewhere. The binary is `./Compiled/bin/scan`. 
 
-## 3. How to use the binary 
+### 3. How to use the binary 
 
 See the last line in `./sh/run_genome_scan.sh`. 
 
 The arguments are the same and in the same order as in section 1.2.
+
+To run the scan with 16 CPU threads with just maximum LOD scores, use
+
+    JULIA_NUM_THREADS=16 julia ./Compiled/bin/scan genoprobfile cleanphenofile gmapfile false output_file
