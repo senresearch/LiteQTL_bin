@@ -51,11 +51,9 @@ function main()
         idx = trunc.(Int, lod[:,1])
         # gmap[1] is data cells. 
         gmap_info = LMGPU.match_gmap(idx, gmap[1])
-        gmap_with_header = vcat(gmap[2], gmap_info)
-        lod_with_header = vcat(reshape(["idx", "lod"], 1,:), lod)
-        lod = hcat(gmap_info, lod)
-        # header = reshape(["marker", "chr", "pos", "idx", "lod"], 1,:)
-        # lod = vcat(header, lod)
+        gmap_lod = hcat(gmap_info,lod[:,2])
+        headers = reshape(["idx", "locus", "chr", "cM", "Mb", "lod"], 1,:)
+        lod = vcat(headers, gmap_lod)
     end
 
     # write output to file
