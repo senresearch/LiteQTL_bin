@@ -1,4 +1,4 @@
-[LMGPU.jl](https://github.com/senresearch/LMGPU.jl) is a package that speeds up eQTL scans. This repository contains code to create a command line interface to LMGPU.jl; you can create a binary to remove the JIT compilation cost of Julia. The repository also contains examples for testing your build. Currently, this script builds a binary for the CPU version of LMGPU.jl. 
+[LiteQTL.jl](https://github.com/senresearch/LiteQTL.jl) is a package that speeds up eQTL scans. This repository contains code to create a command line interface to LiteQTL.jl; you can create a binary to remove the JIT compilation cost of Julia. The repository also contains examples for testing your build. Currently, this script builds a binary for the CPU version of LiteQTL.jl. 
 
 ## Dependencies and build instructions
 

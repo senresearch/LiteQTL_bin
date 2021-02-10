@@ -94,12 +94,12 @@ git-tree-sha1 = "70070a0131f17fcffc5fc004f5f73f037bd217c5"
 uuid = "929cbde3-209d-540e-8aea-75f648917ca0"
 version = "3.2.0"
 
-[[LMGPU]]
+[[LiteQTL]]
 deps = ["CUDA", "DelimitedFiles", "LinearAlgebra", "ZipFile"]
 git-tree-sha1 = "d7a8d17e6f353d91d0fbf51de6a368b79ae128f3"
 repo-rev = "master"
-repo-url = "https://github.com/ChelseaTrotter/LMGPU.jl"
-uuid = "80ae3f88-c08a-44f8-80fe-4bd6150eb394"
+repo-url = "https://github.com/ChelseaTrotter/LiteQTL.jl"
+uuid = "85e3bc59-379b-574d-918d-c856ad6b8b91"
 version = "0.1.1"
 
 [[LibGit2]]

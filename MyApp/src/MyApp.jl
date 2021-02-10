@@ -1,7 +1,7 @@
 module MyApp
 
 
-using LMGPU
+using LiteQTL
 using DelimitedFiles
 
 function julia_main()
@@ -27,15 +27,15 @@ function main()
 
     @info "getting geno file and pheno file"
 
-    LMGPU.set_blas_threads(16);
+    LiteQTL.set_blas_threads(16);
 
     #change to set computation with Float32 or Float64
     datatype = Float64 
     # Read in data.
     println("Getting genotype data:")
-    @time G = LMGPU.get_geno_data(geno_file, datatype)
+    @time G = LiteQTL.get_geno_data(geno_file, datatype)
     println("Getting phenotype data:")
-    @time Y = LMGPU.get_pheno_data(pheno_file, datatype)
+    @time Y = LiteQTL.get_pheno_data(pheno_file, datatype)
     # getting geno and pheno file size.
     n = size(Y,1)
     m = size(Y,2)
@@ -45,12 +45,12 @@ function main()
 
     # running analysis.
     println("Running genome scan takes: ")
-    @time lod = LMGPU.cpurun(Y, G,n,export_matrix);
+    @time lod = LiteQTL.cpurun(Y, G,n,export_matrix);
     if !export_matrix
-        gmap = LMGPU.get_gmap_info(gmap_file)
+        gmap = LiteQTL.get_gmap_info(gmap_file)
         idx = trunc.(Int, lod[:,1])
         # gmap[1] is data cells. 
-        gmap_info = LMGPU.match_gmap(idx, gmap[1])
+        gmap_info = LiteQTL.match_gmap(idx, gmap[1])
         gmap_lod = hcat(gmap_info,lod[:,2])
         headers = reshape(["idx", "locus", "chr", "cM", "Mb", "lod"], 1,:)
         lod = vcat(headers, gmap_lod)
